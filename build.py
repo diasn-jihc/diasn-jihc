@@ -14,10 +14,27 @@ import io
 import sys
 from pathlib import Path
 
+import math
+
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 REF_W, REF_H = 953, 552
+FONT_DIR = Path(__file__).parent / "fonts"  # Inter (лицензия OFL), лежит рядом со скриптом
+
+# Подписи в ряду контактов (координаты эталонного баннера 953x552):
+# (текст, центр пилюли по x, рамка иконки, рамка старого текста)
+CONTACTS = [
+    ("Telegram", 298.5, (237, 434, 260, 454), (275, 439, 359, 451)),
+    ("LinkedIn", 538.5, (446, 432, 471, 455), (485, 439, 631, 451)),
+    ("Gmail", 808.0, (716, 434, 742, 455), (757, 439, 899, 451)),
+]
+PILL_TEXT_SIZE = 14.5          # размер подписи в пилюле
+PILL_TEXT_COLOR = (236, 240, 246)
+LABEL_TEXT = "Contacts"        # вместо "Say Hi"
+LABEL_BOX = (91, 432, 154, 459)  # стираемая область старой надписи
+LABEL_X, LABEL_BASELINE, LABEL_SIZE = 95, 451, 18
+LABEL_COLOR = (242, 244, 247)
 # область слова «Niyazaly» (в координатах эталонного баннера) и цвет слова «Dias»
 NAME_BOX = (318, 86, 500, 138)
 NAME_WHITE = (248, 247, 247)
@@ -80,6 +97,85 @@ def whiten_name(im: Image.Image) -> Image.Image:
     white = np.array(NAME_WHITE, float)
     new = np.where(a > 0, bg * (1 - a) + white * a, reg)
     arr[y0:y1, x0:x1, :3] = new
+    return Image.fromarray(arr.round().clip(0, 255).astype("uint8"), "RGBA")
+
+
+def _font(weight: str, px: float) -> ImageFont.FreeTypeFont:
+    for p in (FONT_DIR / f"Inter-{weight}.otf", Path("/usr/share/fonts/opentype/inter") / f"Inter-{weight}.otf"):
+        if p.exists():
+            return ImageFont.truetype(str(p), max(1, round(px)))
+    raise SystemExit(f"Не найден шрифт Inter-{weight}.otf (положи его в папку fonts/)")
+
+
+def _fill_bg(arr, x0, y0, x1, y1):
+    """Фон прямоугольника: плавный переход по горизонтали между соседними колонками слева и справа."""
+    left = arr[y0:y1, x0 - 3 : x0, :3].mean(1)
+    right = arr[y0:y1, x1 : x1 + 3, :3].mean(1)
+    t = np.linspace(0, 1, x1 - x0)[None, :, None]
+    return left[:, None, :] * (1 - t) + right[:, None, :] * t
+
+
+def _draw_text(arr, text, weight, size, color, x, baseline, gamma=0.85, ss=4):
+    """Рисует текст со сглаживанием (рисуем в 4x и уменьшаем). x/baseline — в пикселях картинки."""
+    f = _font(weight, size * ss)
+    tw = f.getlength(text) / ss
+    px0, py0 = math.floor(x) - 3, math.floor(baseline - size * 1.1) - 3
+    lw, lh = math.ceil(tw) + 8, math.ceil(size * 1.6) + 8
+    layer = Image.new("L", (lw * ss, lh * ss), 0)
+    ImageDraw.Draw(layer).text(((x - px0) * ss, (baseline - py0) * ss), text, font=f, fill=255, anchor="ls")
+    a = np.asarray(layer.resize((lw, lh), Image.BOX), float)[..., None] / 255.0
+    a = a**gamma
+    H, W = arr.shape[:2]
+    ys0, xs0 = max(py0, 0), max(px0, 0)
+    ys1, xs1 = min(py0 + lh, H), min(px0 + lw, W)
+    a = a[ys0 - py0 : ys1 - py0, xs0 - px0 : xs1 - px0]
+    reg = arr[ys0:ys1, xs0:xs1, :3]
+    arr[ys0:ys1, xs0:xs1, :3] = reg * (1 - a) + np.array(color, float) * a
+
+
+def retext(im: Image.Image) -> Image.Image:
+    """«Say Hi» -> «Contacts»; в пилюлях вместо ссылок — логотип + название (по центру)."""
+    W, H = im.size
+    s = W / REF_W
+    arr = np.array(im.convert("RGBA")).astype(float)
+    orig = arr.copy()
+    S = lambda v: int(round(v * s))  # noqa: E731
+
+    def erase(x0, y0, x1, y1):
+        """Стирает прямоугольник фоном; края смягчены, чтобы не было видно границы."""
+        bg = _fill_bg(orig, x0, y0, x1, y1)
+        r = max(2, S(3))
+        ramp = lambda n: np.clip(np.minimum(np.arange(n) + 1, np.arange(n)[::-1] + 1) / r, 0, 1)  # noqa: E731
+        w = (ramp(y1 - y0)[:, None] * ramp(x1 - x0)[None, :])[..., None]
+        arr[y0:y1, x0:x1, :3] = orig[y0:y1, x0:x1, :3] * (1 - w) + bg * w
+        return bg
+
+    # 1) пилюли: стираем иконку+текст, ставим иконку и название по центру
+    for text, cx, (ix0, iy0, ix1, iy1), (tx0, ty0, tx1, ty1) in CONTACTS:
+        x0, x1, y0, y1 = S(ix0 - 5), S(tx1 + 6), S(428), S(460)
+        bg = erase(x0, y0, x1, y1)
+        # иконка: вырезаем из оригинала (с запасом 2px) и ставим на новое место;
+        # переносится только сама иконка (по маске), фон вокруг остаётся чистым
+        m = 2
+        ox0, ox1, oy0, oy1 = S(ix0) - m, S(ix1 + 1) + m, S(iy0) - m, S(iy1 + 1) + m
+        icon = orig[oy0:oy1, ox0:ox1, :3]
+        bg_old = bg[oy0 - y0 : oy1 - y0, ox0 - x0 : ox1 - x0]
+        mask = np.clip((np.abs(icon - bg_old).max(2) - 5) / 25, 0, 1)[..., None]
+        font = _font("Medium", PILL_TEXT_SIZE * s * 4)
+        text_w = font.getlength(text) / 4
+        icon_w, gap = S(ix1 + 1 - ix0), S(10)
+        left = cx * s - (icon_w + gap + text_w) / 2
+        nx0 = int(round(left)) - m
+        target = arr[oy0:oy1, nx0 : nx0 + (ox1 - ox0), :3]
+        arr[oy0:oy1, nx0 : nx0 + (ox1 - ox0), :3] = np.clip(target + mask * (icon - bg_old), 0, 255)
+        base = 445.0 * s + 0.727 * PILL_TEXT_SIZE * s / 2  # центр заглавных букв на центре пилюли
+        _draw_text(arr, text, "Medium", PILL_TEXT_SIZE * s, PILL_TEXT_COLOR, left + icon_w + gap, base)
+
+    # 2) «Say Hi» -> «Contacts»
+    lx0, ly0, lx1, ly1 = (S(v) for v in LABEL_BOX)
+    erase(lx0, ly0, lx1, ly1)
+    _draw_text(arr, LABEL_TEXT, "SemiBold", LABEL_SIZE * s, LABEL_COLOR, LABEL_X * s, LABEL_BASELINE * s)
+
     return Image.fromarray(arr.round().clip(0, 255).astype("uint8"), "RGBA")
 
 
@@ -160,7 +256,7 @@ def row_overlay(i, ox, oy):
 
 
 def main(src: str, out: str = "assets") -> None:
-    im = whiten_name(Image.open(src).convert("RGBA"))
+    im = retext(whiten_name(Image.open(src).convert("RGBA")))
     W, H = im.size
     ys = [round(v / REF_H * H) for v in Y_CUTS]
     xs = [round(v / REF_W * W) for v in X_CUTS]
