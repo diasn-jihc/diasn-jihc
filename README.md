@@ -1,16 +1,19 @@
-## Hi there 👋
+<div align="center">
 
-<!--
-**diasn-jihc/diasn-jihc** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<img src="./assets/banner-animated.gif" alt="Dias Niyazaly — Student & Mobile Developer, Tech Stack" width="100%" />
 
-Here are some ideas to get you started:
+<br/>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<a href="https://t.me/dniyazaly">
+  <img src="https://img.shields.io/badge/Telegram-@dniyazaly-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram @dniyazaly" />
+</a>
+&nbsp;
+<a href="https://www.linkedin.com/in/dias-niyazaly-5a2b6b433/">
+  <img src="https://img.shields.io/badge/LinkedIn-Dias%20Niyazaly-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Dias Niyazaly" />
+</a>
+&nbsp;
+<a href="mailto:dias.niyazaly@jihc.edu.kz">
+  <img src="https://img.shields.io/badge/Gmail-Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Dias Niyazaly" />
+</a>
+
+</div>
