@@ -2,7 +2,7 @@
 """Собирает АНИМИРОВАННЫЙ кликабельный баннер для GitHub README.
 
 Запуск:  python3 build.py banner.png
-Нужен: pip install pillow
+Нужен: pip install pillow numpy
 Результат: assets/top.svg, assets/row_0..6.svg, assets/bottom.png и README.md
 
 Каждый кусок баннера — SVG со встроенной картинкой (PNG в base64) и анимацией поверх.
@@ -14,9 +14,13 @@ import io
 import sys
 from pathlib import Path
 
+import numpy as np
 from PIL import Image
 
 REF_W, REF_H = 953, 552
+# область слова «Niyazaly» (в координатах эталонного баннера) и цвет слова «Dias»
+NAME_BOX = (318, 86, 500, 138)
+NAME_WHITE = (248, 247, 247)
 Y_CUTS = [0, 398, 490, 552]
 X_CUTS = [0, 211, 385, 421, 656, 690, 924, 953]
 SCALE = 99.6  # ширина всего баннера в % (чуть меньше 100, чтобы ряд не переносился)
@@ -55,6 +59,28 @@ DEFS = """
 </linearGradient>
 <clipPath id="panel"><rect x="21" y="241" width="914" height="144" rx="18"/></clipPath>
 """
+
+
+def whiten_name(im: Image.Image) -> Image.Image:
+    """Перекрашивает градиентное слово «Niyazaly» в белый, сохраняя сглаживание краёв."""
+    W, H = im.size
+    x0, x1 = round(NAME_BOX[0] / REF_W * W), round(NAME_BOX[2] / REF_W * W)
+    y0, y1 = round(NAME_BOX[1] / REF_H * H), round(NAME_BOX[3] / REF_H * H)
+    arr = np.array(im.convert("RGBA")).astype(float)
+    reg = arr[y0:y1, x0:x1, :3]
+    h = reg.shape[0]
+    # фон: плавный переход между верхними и нижними строками области (вокруг текста чистое тёмное небо)
+    top, bot = reg[:2].mean(0), reg[-2:].mean(0)
+    t = np.linspace(0, 1, h)[:, None, None]
+    bg = top[None] * (1 - t) + bot[None] * t
+    mx, bgmx = reg.max(2), bg.max(2)
+    a = np.clip((mx - bgmx) / (250.0 - bgmx), 0, 1)       # «сколько текста» в пикселе
+    a = np.clip((a - 0.04) / 0.96, 0, 1)                   # отсекаем шум фона
+    a = a[..., None]
+    white = np.array(NAME_WHITE, float)
+    new = np.where(a > 0, bg * (1 - a) + white * a, reg)
+    arr[y0:y1, x0:x1, :3] = new
+    return Image.fromarray(arr.round().clip(0, 255).astype("uint8"), "RGBA")
 
 
 def b64_png(im: Image.Image) -> str:
@@ -134,7 +160,7 @@ def row_overlay(i, ox, oy):
 
 
 def main(src: str, out: str = "assets") -> None:
-    im = Image.open(src).convert("RGBA")
+    im = whiten_name(Image.open(src).convert("RGBA"))
     W, H = im.size
     ys = [round(v / REF_H * H) for v in Y_CUTS]
     xs = [round(v / REF_W * W) for v in X_CUTS]
