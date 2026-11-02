@@ -1,19 +1,9 @@
 <div align="center">
 
-<img src="./assets/banner-animated.gif" alt="Dias Niyazaly — Student & Mobile Developer, Tech Stack" width="100%" />
+<img src="./assets/banner.png" alt="Dias Niyazaly — Student & Mobile Developer | Tech Stack and Contact" width="100%" />
 
-<br/>
-
-<a href="https://t.me/dniyazaly">
-  <img src="https://img.shields.io/badge/Telegram-@dniyazaly-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram @dniyazaly" />
-</a>
-&nbsp;
-<a href="https://www.linkedin.com/in/dias-niyazaly-5a2b6b433/">
-  <img src="https://img.shields.io/badge/LinkedIn-Dias%20Niyazaly-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Dias Niyazaly" />
-</a>
-&nbsp;
-<a href="mailto:dias.niyazaly@jihc.edu.kz">
-  <img src="https://img.shields.io/badge/Gmail-Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Dias Niyazaly" />
-</a>
+[![Telegram](https://img.shields.io/badge/Telegram-@dniyazaly-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/dniyazaly)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Dias_Niyazaly-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dias-niyazaly-5a2b6b433/)
+[![Gmail](https://img.shields.io/badge/Gmail-Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:dias.niyazaly@jihc.edu.kz)
 
 </div>
