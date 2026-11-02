@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./banner.png" alt="Dias Niyazaly — Student & Mobile Developer" width="100%" />
+  <img src="./assets/banner.png" alt="Dias Niyazaly — Student & Mobile Developer" width="100%" />
 </div>
 
 <h2 align="center">Tech Stack</h2>
