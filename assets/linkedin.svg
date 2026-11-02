@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="436" height="92" viewBox="0 0 436 92" font-family="'Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#F5C451"/><stop offset="1" stop-color="#C98F1A"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7BE8FA"/><stop offset=".5" stop-color="#00AFCA"/><stop offset="1" stop-color="#007C96"/></linearGradient>
+<linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4DA3FF"/><stop offset=".5" stop-color="#0A66C2"/><stop offset="1" stop-color="#074A8F"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00AFCA"/><stop offset="1" stop-color="#F5C451"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0C1526"/><stop offset="1" stop-color="#060A12"/></linearGradient>
+<linearGradient id="name" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7BE8FA"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE08A"/></linearGradient></defs><rect x=".75" y=".75" width="434.5" height="90.5" rx="22" fill="#0D1626" stroke="url(#blue)" stroke-width="1.5"/>
+<circle cx="52" cy="46" r="26" fill="url(#blue)"/><text x="52" y="54" text-anchor="middle" font-size="19" font-weight="800" fill="#fff">in</text>
+<text x="96" y="38" font-size="11" fill="#4DA3FF" letter-spacing="3" font-weight="700">LINKEDIN</text><text x="96" y="64" font-size="24" fill="#fff" font-weight="600">Niyazaly Dias</text>
+<path d="M404 38 L414 46 L404 54" fill="none" stroke="#4DA3FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/></svg>

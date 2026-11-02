@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" font-family="'Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#F5C451"/><stop offset="1" stop-color="#C98F1A"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7BE8FA"/><stop offset=".5" stop-color="#00AFCA"/><stop offset="1" stop-color="#007C96"/></linearGradient>
+<linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4DA3FF"/><stop offset=".5" stop-color="#0A66C2"/><stop offset="1" stop-color="#074A8F"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00AFCA"/><stop offset="1" stop-color="#F5C451"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0C1526"/><stop offset="1" stop-color="#060A12"/></linearGradient>
+<linearGradient id="name" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7BE8FA"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE08A"/></linearGradient><clipPath id="c"><rect width="900" height="340" rx="26"/></clipPath><filter id="b" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="42"/></filter><pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#fff" opacity=".07"/></pattern></defs><rect width="900" height="340" rx="26" fill="url(#bg)"/>
+<g clip-path="url(#c)"><circle cx="130" cy="40" r="120" fill="#00AFCA" opacity=".28" filter="url(#b)"><animateTransform attributeName="transform" type="translate" values="0,0;40,30;0,0" dur="10s" repeatCount="indefinite"/></circle>
+<circle cx="780" cy="320" r="130" fill="#F5C451" opacity=".24" filter="url(#b)"><animateTransform attributeName="transform" type="translate" values="0,0;-40,-24;0,0" dur="12s" repeatCount="indefinite"/></circle>
+<rect width="900" height="340" fill="url(#dots)"/></g>
+<rect x=".75" y=".75" width="898.5" height="338.5" rx="25" fill="none" stroke="url(#edge)" stroke-width="1.5" opacity=".7"/>
+<text x="84" y="92" font-size="13" fill="#F5C451" letter-spacing="6" font-weight="600">MOBILE DEVELOPER</text>
+<rect x="84" y="106" width="48" height="2.5" rx="1.2" fill="url(#gold)"/>
+<text x="82" y="182" font-size="70" font-weight="700" fill="url(#name)" letter-spacing="1" font-family="Georgia,Palatino,Times New Roman,serif">Niyazaly Dias</text>
+<text x="84" y="226" font-size="22" fill="#E6EDF7" font-weight="500">Flutter &amp; Python <tspan fill="#F5C451">·</tspan> AI Enthusiast</text>
+<text x="62" y="282" font-size="20" fill="#00AFCA" font-family="Consolas,monospace">›</text><text x="84" y="282" font-size="18" fill="#9FB3CC" opacity="0">Building mobile apps with Flutter<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.28;0.34;1" dur="9s" begin="0s" repeatCount="indefinite"/></text><text x="84" y="282" font-size="18" fill="#9FB3CC" opacity="0">Writing clean code in Dart &amp; Python<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.28;0.34;1" dur="9s" begin="3s" repeatCount="indefinite"/></text><text x="84" y="282" font-size="18" fill="#9FB3CC" opacity="0">Exploring the world of AI<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.28;0.34;1" dur="9s" begin="6s" repeatCount="indefinite"/></text>
+<g><animateTransform attributeName="transform" type="translate" values="0,0;0,-8;0,0" dur="5s" repeatCount="indefinite"/>
+<rect x="702" y="40" width="130" height="260" rx="26" fill="#0B1424" stroke="url(#cyan)" stroke-width="2.5"/>
+<rect x="744" y="50" width="46" height="8" rx="4" fill="#1A2A44"/>
+<circle cx="767" cy="108" r="26" fill="url(#cyan)"/><path d="M754 112 L767 92 L780 112 L767 106 Z" fill="#06101E" opacity=".85"/>
+<rect x="722" y="152" width="90" height="10" rx="5" fill="url(#gold)"/><rect x="722" y="172" width="62" height="8" rx="4" fill="#24385A"/>
+<rect x="722" y="192" width="90" height="38" rx="12" fill="#12203A" stroke="#00AFCA" stroke-opacity=".5"/><rect x="722" y="240" width="90" height="38" rx="12" fill="#12203A" stroke="#F5C451" stroke-opacity=".5"/></g></svg>
