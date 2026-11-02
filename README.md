@@ -1,9 +1,5 @@
 <div align="center">
-
-<img src="./assets/banner.png" alt="Dias Niyazaly — Student & Mobile Developer | Tech Stack and Contact" width="100%" />
-
-[![Telegram](https://img.shields.io/badge/Telegram-@dniyazaly-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/dniyazaly)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Dias_Niyazaly-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dias-niyazaly-5a2b6b433/)
-[![Gmail](https://img.shields.io/badge/Gmail-Email-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:dias.niyazaly@jihc.edu.kz)
-
+<img align="top" src="./assets/top.svg" width="99.6%" alt="Dias Niyazaly — Student &amp; Mobile Developer, Taraz, Kazakhstan. Tech stack: Flutter, Dart, Python, HTML, CSS, JavaScript, C, C++, React JS" /><br>
+<img align="top" src="./assets/row_0.svg" width="22.052%" alt="" /><a href="https://t.me/dniyazaly" title="Telegram — t.me/dniyazaly"><img align="top" src="./assets/row_1.svg" width="18.185%" alt="Telegram — t.me/dniyazaly" /></a><img align="top" src="./assets/row_2.svg" width="3.762%" alt="" /><a href="https://www.linkedin.com/in/dias-niyazaly-5a2b6b433" title="LinkedIn — Dias Niyazaly"><img align="top" src="./assets/row_3.svg" width="24.56%" alt="LinkedIn — Dias Niyazaly" /></a><img align="top" src="./assets/row_4.svg" width="3.553%" alt="" /><a href="https://mail.google.com/mail/?view=cm&fs=1&to=dias.niyazaly@jihc.edu.kz" title="Gmail — dias.niyazaly@jihc.edu.kz"><img align="top" src="./assets/row_5.svg" width="24.456%" alt="Gmail — dias.niyazaly@jihc.edu.kz" /></a><img align="top" src="./assets/row_6.svg" width="3.031%" alt="" /><br>
+<img align="top" src="./assets/bottom.png" width="99.6%" alt="" />
 </div>
